@@ -16,6 +16,21 @@
 #include "file.h"
 #include "fcntl.h"
 
+// ------- ostep-project 1 system call setup -------
+uint readcount;
+struct spinlock *readcountlock;
+
+// Initialze readcountlock spinlock. This lock gets used to increment
+// readcount anytime sys_read() gets called. The readcount counter
+// gets returned when sys_getreadcount() is called
+static void
+initreadcount(void)
+{
+  initlock(readcountlock, "readcountlock");
+}  
+// ------- ostep-project 1 system call setup -------
+
+
 // Fetch the nth word-sized system call argument as a file descriptor
 // and return both the descriptor and the corresponding struct file.
 static int
@@ -69,6 +84,11 @@ sys_dup(void)
 int
 sys_read(void)
 {
+  // for ostep-project 1 getreadcount() system call
+  acquire(readcountlock);
+  readcount++;
+  release(readcountlock);  
+
   struct file *f;
   int n;
   char *p;
@@ -76,6 +96,19 @@ sys_read(void)
   if(argfd(0, 0, &f) < 0 || argint(2, &n) < 0 || argptr(1, &p, n) < 0)
     return -1;
   return fileread(f, p, n);
+}
+
+// ostep-project 1 system call - returns value of readcount
+// the number of times sys_read() gets called by any/all user processes
+int
+sys_getreadcount(void)
+{
+  uint count;
+  aquire(readcountlock);
+  count = readcount;
+  release(readcountlock);
+  
+  return count;
 }
 
 int

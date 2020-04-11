@@ -20,3 +20,5 @@
 #define SYS_link   19
 #define SYS_mkdir  20
 #define SYS_close  21
+// ostep-project 1 system call
+#define SYS_getreadcount 22
