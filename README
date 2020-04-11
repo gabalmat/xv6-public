@@ -1,3 +1,17 @@
+My solutions to OSTEP projects - Kernel Hacking Projects (xv6)
+https://github.com/remzi-arpacidusseau/ostep-projects
+
+Each branch corresponds to the following project descriptions:
+
+Project 1: Intro To xv6 
+(https://github.com/remzi-arpacidusseau/ostep-projects/tree/master/initial-xv6)
+This first project is just a warmup, and thus relatively light on work. The goal 
+of the project is simple: to add a system call to xv6. Your system call, getreadcount(), simply returns
+how many times that the read() system call has been called by user processes since the time that the
+kernel was booted.
+
+
+---------------------------------------------------------------------------------------------------------------
 xv6 is a re-implementation of Dennis Ritchie's and Ken Thompson's Unix
 Version 6 (v6).  xv6 loosely follows the structure and style of v6,
 but is implemented for a modern x86-based multiprocessor using ANSI C.
