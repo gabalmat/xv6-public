@@ -128,7 +128,7 @@ static int (*syscalls[])(void) = {
 [SYS_mkdir]   sys_mkdir,
 [SYS_close]   sys_close,
 // ostep-project 1 system call
-[SYS_getreadcount  sys_getreadcount,
+[SYS_getreadcount]  sys_getreadcount,
 };
 
 void
