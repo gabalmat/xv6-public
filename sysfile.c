@@ -85,9 +85,9 @@ int
 sys_read(void)
 {
   // for ostep-project 1 getreadcount() system call
-  acquire(readcountlock);
+  acquire(&readcountlock);
   readcount++;
-  release(readcountlock);  
+  release(&readcountlock);  
 
   struct file *f;
   int n;
@@ -104,9 +104,9 @@ int
 sys_getreadcount(void)
 {
   uint count;
-  acquire(readcountlock);
+  acquire(&readcountlock);
   count = readcount;
-  release(readcountlock);
+  release(&readcountlock);
   
   return count;
 }
