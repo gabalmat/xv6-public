@@ -23,7 +23,7 @@ struct spinlock *readcountlock;
 // Initialze readcountlock spinlock. This lock gets used to increment
 // readcount anytime sys_read() gets called. The readcount counter
 // gets returned when sys_getreadcount() is called
-static void
+void
 initreadcount(void)
 {
   initlock(readcountlock, "readcountlock");
@@ -104,7 +104,7 @@ int
 sys_getreadcount(void)
 {
   uint count;
-  aquire(readcountlock);
+  acquire(readcountlock);
   count = readcount;
   release(readcountlock);
   
