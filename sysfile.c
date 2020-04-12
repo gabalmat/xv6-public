@@ -18,7 +18,7 @@
 
 // ------- ostep-project 1 system call setup -------
 uint readcount;
-struct spinlock *readcountlock;
+struct spinlock readcountlock;
 
 // Initialze readcountlock spinlock. This lock gets used to increment
 // readcount anytime sys_read() gets called. The readcount counter
@@ -26,7 +26,7 @@ struct spinlock *readcountlock;
 void
 initreadcount(void)
 {
-  initlock(readcountlock, "readcountlock");
+  initlock(&readcountlock, "readcountlock");
 }  
 // ------- ostep-project 1 system call setup -------
 
