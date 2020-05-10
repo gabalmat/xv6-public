@@ -142,6 +142,10 @@ userinit(void)
   safestrcpy(p->name, "initcode", sizeof(p->name));
   p->cwd = namei("/");
 
+  // give this process 1 ticket for lottery scheduling
+  // by default a process should get 1 ticket
+  p->tickets = 1;
+
   // this assignment to p->state lets other cores
   // run this process. the acquire forces the above
   // writes to be visible, and the lock is also needed
@@ -199,6 +203,11 @@ fork(void)
   np->sz = curproc->sz;
   np->parent = curproc;
   *np->tf = *curproc->tf;
+
+  // give np the same number of tickets as the parent
+  // for lottery scheduling - child process should
+  // inherit the same number of tickets as their parents
+  np->tickets = curproc->tickets;
 
   // Clear %eax so that fork returns 0 in the child.
   np->tf->eax = 0;
