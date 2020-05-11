@@ -89,3 +89,16 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+// for lottery scheduler
+// set the number of tickets held by the calling process
+int sys_settickets(void)
+{
+  int number;
+
+  if (argint(0, &number) < 0)
+    return -1;
+  myproc()->tickets = number;
+
+  return 0; 
+}

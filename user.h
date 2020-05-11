@@ -23,6 +23,8 @@ int getpid(void);
 char* sbrk(int);
 int sleep(int);
 int uptime(void);
+// for lottery scheduler
+int settickets(int number);
 
 // ulib.c
 int stat(const char*, struct stat*);
